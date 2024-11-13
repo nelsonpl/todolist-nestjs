@@ -37,13 +37,14 @@ export class TasksService {
       .find(filters)
       .skip(skip)
       .limit(limit)
+      .sort({ createdAt: -1 })
       .exec();
     const totalItems = await this.taskModel.countDocuments(filters);
 
     return {
       data: tasks,
       totalItems,
-      currentPage: page,
+      currentPage: +page,
     };
   }
 
